@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: API definition dummy
+  title: API definition dummy - 1
   version: 1.0.0
 servers:
   - url: http
