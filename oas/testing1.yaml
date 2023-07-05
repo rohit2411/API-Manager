@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: API-11 testing-7
+  title: API-11 testing-8
   version: 1.0.0
 servers:
   - url: http
