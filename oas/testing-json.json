@@ -1,0 +1,425 @@
+{
+    "info": {
+      "title": "API03",
+      "contact": {
+        "name": "Abc"
+      },
+      "version": 1,
+      "x-fico-api": {
+        "lastReviewedDate": "never",
+        "apiStandardVersion": "1.4",
+        "lastReviewedVersion": "never"
+      },
+      "description": "ACM application hhbhbhbhbh and identity provider application such as Keycloak, Okta, etc"
+    },
+    "paths": {
+      "/api/users/{userIdentifier}/group-namesabc": {
+        "get": {
+          "summary": "Fetches $$gdvg ndcb current tenant group names of user specified by encrypted user identifier. The user identifier can be either username or email.",
+          "responses": {
+            "200": {
+              "content": {
+                "application/vnd.com.fico.idpadapter.v1+json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ListResponseString"
+                  }
+                }
+              },
+              "description": "Successful operation"
+            },
+            "400": {
+              "content": {
+                "application/vnd.com.fico.idpadapter.v1+json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              },
+              "description": "Invalid input"
+            },
+            "401": {
+              "content": {
+                "application/vnd.com.fico.idpadapter.v1+json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              },
+              "description": "JWT bad or expired"
+            },
+            "404": {
+              "content": {
+                "application/vnd.com.fico.idpadapter.v1+json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              },
+              "description": "Wrong URL or invalid user identifier"
+            },
+            "415": {
+              "content": {
+                "application/vnd.com.fico.idpadapter.v1+json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              },
+              "description": "Unsupported media type."
+            }
+          },
+          "parameters": [
+            {
+              "in": "path",
+              "name": "userIdentifier",
+              "schema": {
+                "type": "string"
+              },
+              "required": true,
+              "description": "Encrypted user identifier",
+              "x-encrypted": "true"
+            }
+          ],
+          "operationId": "getGroupNamesForUser1233"
+        }
+      }
+    },
+    "openapi": "3.0.1",
+    "security": [
+      {
+        "Idp-jwt-token": []
+      }
+    ],
+    "components": {
+      "schemas": {
+        "Error": {
+          "type": "object",
+          "required": [
+            "code",
+            "desc",
+            "timestamp"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "A string that conveys the identity of the microservice that produced the error, the type of the error and a unique lookup number"
+            },
+            "desc": {
+              "type": "string",
+              "description": "A human-readable representation of the error for client programmers"
+            },
+            "spanId": {
+              "type": "string",
+              "description": "If available, the OpenTracing span ID, equivalent to the X-B3-SpanId header"
+            },
+            "target": {
+              "type": "string",
+              "description": "An identifier to help the client locate the error, typically a JSON property name"
+            },
+            "details": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Error"
+              },
+              "description": "An array of details about specific errors that led to this reported error"
+            },
+            "message": {
+              "type": "string",
+              "description": "A possibly localized message meant for users to read in the absence of any other client-side handling."
+            },
+            "traceId": {
+              "type": "string",
+              "description": "If available, the OpenTracing trace ID, equivalent to the X-B3-TraceId header"
+            },
+            "parentId": {
+              "type": "string",
+              "description": "If available, the OpenTracing parent-span ID, equivalent to the X-B3-ParentId header"
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Time that the error was first detected. MUST adhere to the data time format ISO-8601 and RFC-3339. The time MUST be in the UTC timezone and MUST include a timezone indicator. Example: 2021-01-21T15:30:09.266Z"
+            },
+            "innerError": {
+              "$ref": "#/components/schemas/InnerError"
+            },
+            "partnerCode": {
+              "type": "string",
+              "description": "Optional code for use with partners/customers where a non-standard format is required. Example: OM-8001"
+            }
+          },
+          "description": "Error is used to return the error details inside error response object"
+        },
+        "UserDto": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "username": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            }
+          },
+          "description": "Carries fewer details about the user, i.e., name, email and id"
+        },
+        "EventDto": {
+          "type": "object",
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "time": {
+              "$ref": "#/components/schemas/LocalTime"
+            },
+            "userId": {
+              "type": "string"
+            },
+            "username": {
+              "type": "string"
+            },
+            "eventType": {
+              "type": "string"
+            }
+          },
+          "description": "Structure of the user event returned when searched for user events"
+        },
+        "GroupDto": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "description": "Carries minimum information about the group"
+        },
+        "LocalTime": {
+          "type": "object",
+          "properties": {
+            "hour": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nano": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "minute": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "second": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "InnerError": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "A more specific error code, or the code for an upstream error leading to this one error"
+            },
+            "desc": {
+              "type": "string",
+              "description": "If defined, a human-readable representation of the error for client programmers"
+            },
+            "innerError": {
+              "$ref": "#/components/schemas/InnerError"
+            }
+          },
+          "description": "InnerError is used to return more specific details about an error other than the Error class "
+        },
+        "VersionDto": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string"
+            }
+          },
+          "description": "Encapsulates the version information of running idp-adapter version"
+        },
+        "ErrorResponse": {
+          "type": "object",
+          "required": [
+            "error"
+          ],
+          "properties": {
+            "error": {
+              "$ref": "#/components/schemas/Error"
+            }
+          },
+          "description": "ErrorResponse is used to return a exception response on RESTful API methods. The response is a container for an error object which contains details about the error"
+        },
+        "SearchWordDto": {
+          "type": "object",
+          "properties": {
+            "searchWord": {
+              "type": "string"
+            }
+          },
+          "description": "Carries the search word which will be used to search for user"
+        },
+        "UserDetailDto": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "groups": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/GroupDto"
+              }
+            },
+            "enabled": {
+              "type": "boolean"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "username": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            }
+          },
+          "description": "Carries details of the user including groups"
+        },
+        "GroupDetailDto": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "emails": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "description": "Carries information about group details"
+        },
+        "ListResponseString": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "description": "ListResponse is used to return a list of objects on RESTful API methods."
+        },
+        "ListResponseUserDto": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/UserDto"
+              }
+            }
+          },
+          "description": "ListResponse is used to return a list of objects on RESTful API methods."
+        },
+        "ListResponseEventDto": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/EventDto"
+              }
+            }
+          },
+          "description": "ListResponse is used to return a list of objects on RESTful API methods."
+        },
+        "ListResponseGroupDto": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/GroupDto"
+              }
+            }
+          },
+          "description": "ListResponse is used to return a list of objects on RESTful API methods."
+        },
+        "EventFilterCriteriaDto": {
+          "type": "object",
+          "required": [
+            "client",
+            "dateFrom",
+            "dateTo",
+            "eventType"
+          ],
+          "properties": {
+            "client": {
+              "type": "string"
+            },
+            "dateTo": {
+              "type": "string",
+              "format": "date"
+            },
+            "dateFrom": {
+              "type": "string",
+              "format": "date"
+            },
+            "username": {
+              "type": "string"
+            },
+            "eventType": {
+              "type": "string"
+            }
+          },
+          "description": "Criteria to filter the user events"
+        },
+        "ListResponseUserDetailDto": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/UserDetailDto"
+              }
+            }
+          },
+          "description": "ListResponse is used to return a list of objects on RESTful API methods."
+        }
+      },
+      "securitySchemes": {
+        "Idp-jwt-token": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    }
+  }
