@@ -9,7 +9,7 @@ paths:
     get:
       responses:
         '200':
-          description: OK changes
+          description: OK changes -
         '404':
           description: Not found
           content:
