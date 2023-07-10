@@ -15,7 +15,7 @@
     "paths": {
       "/api/users/{userIdentifier}/group-namesabc": {
         "get": {
-          "summary": "Fetches $$gdvg ndcb current tenant group names of user specified by encrypted user identifier. The user identifier can be either username or email.",
+          "summary": "Fetches gdvg ndcb current tenant group names of user specified by encrypted user identifier. The user identifier can be either username or email.",
           "responses": {
             "200": {
               "content": {
@@ -84,7 +84,7 @@
         }
       }
     },
-    "openapi": "3.0.1",
+    "openapi": "2.0.1",
     "security": [
       {
         "Idp-jwt-token": []
